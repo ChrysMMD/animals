@@ -8,7 +8,15 @@
   </head>
   <body>
     <h1>Animals</h1>
-    
+
+    <button class="filter" data-action="filter" data-filter="cat">
+      Only cats!
+    </button>
+    <button class="filter" data-action="filter" data-filter="dog">
+      Only dogs!
+    </button>
+    <button class="filter" data-action="filter" data-filter="#">All!</button>
+
     <table id="list">
       <thead>
         <tr>
@@ -20,7 +28,6 @@
       </thead>
       <tbody>
         <!-- animal template will be copied and inserted here -->
-        
       </tbody>
     </table>
 
@@ -32,7 +39,7 @@
         <td data-field="age">AGE</td>
       </tr>
     </template>
-    
+
     <script src="animals_objects.js"></script>
   </body>
 </html>

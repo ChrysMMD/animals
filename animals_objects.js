@@ -14,10 +14,14 @@ const allAnimals = [];
 
 function start() {
     console.log("ready");
-
+    registerButtons()
     loadJSON();
 }
 
+function registerButtons() {
+    document.querySelectorAll("[data-action='filter']")
+        .forEach(button => button.addEventListener("click", selectFilter));
+}
 
 function loadJSON() {
     fetch("animals.json")
@@ -54,15 +58,45 @@ function prepareObjects(jsonData) {
         allAnimals.push(animal);
     });
 
-    displayList();
+    displayList(allAnimals);
 }
 
-function displayList() {
+function selectFilter(event) {
+    const filter = event.target.dataset.filter;
+    console.log(`user selected ${filter}`);
+    filterList(filter);
+}
+
+function filterList(filterBy) {
+    let filteredList = allAnimals;
+    if (filterBy === "cat") {
+        //create a filter list of only cats
+        filteredList = allAnimals.filter(isCat);
+    }
+
+    else if (filterBy === "dog") {
+        filteredList = allAnimals.filter(isDog);
+
+    }
+
+
+    displayList(filteredList);
+}
+
+function isCat(animal) {
+    return animal.type === "cat";
+}
+
+function isDog(animal) {
+    return animal.type === "dog";
+}
+
+function displayList(animals) {
     // clear the list
     document.querySelector("#list tbody").innerHTML = "";
 
     // build a new list
-    allAnimals.forEach(displayAnimal);
+    animals.forEach(displayAnimal);
 }
 
 function displayAnimal(animal) {
