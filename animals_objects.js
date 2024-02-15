@@ -2,8 +2,9 @@
 
 window.addEventListener("DOMContentLoaded", start);
 
+let allAnimals = [];
 
-let Animal = {
+const Animal = {
     name: "default name",
     desc: "no description",
     type: "uknown",
@@ -16,7 +17,7 @@ const settings = {
     sortDir: "asc"
 };
 
-const allAnimals = [];
+
 
 function start() {
     console.log("ready");
@@ -109,6 +110,14 @@ function isDog(animal) {
 function selectSort(event) {
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
+
+    //find "old" sortBy element, and remove .sortBy
+    const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+    console.log(oldElement);
+    // find "old" sortBy element and remove sortBy
+    // oldElement.classList.remove("sortby");
+    //   // indicate active sort
+    event.target.classList.add("sortby");
 
     //toggle the direction
     if (sortDir === "asc") {
